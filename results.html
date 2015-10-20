@@ -1,0 +1,18 @@
+	<div class="movie-box">
+
+        <ul>
+            <li class="result" ng-repeat="result in results">
+                <div class="row">
+                    <div class="two columns">
+                        <img class="results-img" alt="image" ng-src="{{result.poster_path}}" />
+                    </div>
+                    <div class="ten columns">
+                        <h2> {{result.original_title}} </h2>
+                        <p class="release"> {{result.release_date}} </p>
+                        <p class="desc"> {{result.overview}} </p>
+                    </div>
+                </div>
+            </li> 
+        </ul>
+        
+	</div>

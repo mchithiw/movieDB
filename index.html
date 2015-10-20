@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Movie DB</title>
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=9">
+        <meta name="viewport" content="width=device-width"/>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="content/css/normalize.css">
+        <link rel="stylesheet" href="content/css/skeleton.css">
+        <link rel="stylesheet" href="content/css/style.css">
+
+    </head>
+    
+    <body ng-app="myApp">
+
+    	<nav class="header"> 
+    		<h3 class="title"> Mehtab's Movie Database </h3> 
+    	</nav>
+
+    	<div ng-controller="mainController" class="container">
+
+    		<div class="row">
+    			<form ng-submit="fetchData()" class="twelve columns">
+    				<input type="text" ng-model="search" placeholder="Enter name" class="search"/> 
+    				<button type="submit" class="submit button-primary"> Search </button>
+    			</form>
+    		</div>
+
+            <div ng-view></div>
+
+    	</div>
+
+    <script type="text/javascript" src="scripts/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"> </script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+    </body>
+
+ </html>
