@@ -34,10 +34,16 @@ ul{
     margin: 5px;
 }
 
-h2{
-    display: block;
+.list-title{
+    display: inline;
     margin-bottom: 0;
     padding-bottom: 0;
+    cursor: pointer;
+    color: #325c9f;
+}
+
+.list-title:hover{
+    color: #8eadc7
 }
 
 .desc{

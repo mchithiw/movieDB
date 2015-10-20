@@ -7,7 +7,7 @@
                         <img class="results-img" alt="image" ng-src="{{result.poster_path}}" />
                     </div>
                     <div class="ten columns">
-                        <h2> {{result.original_title}} </h2>
+                        <h2 class="list-title" ng-click="singlePage(result.media_type, result.id)"> {{result.original_title}} </h2>
                         <p class="release"> {{result.release_date}} </p>
                         <p class="desc"> {{result.overview}} </p>
                     </div>
