@@ -19,17 +19,17 @@
     <body ng-app="myApp">
 
     	<nav class="header"> 
-    		<h3 class="title"> Mehtab's Movie Database </h3> 
+    		<h3 class="title"> Mehtab's Movie DB </h3> 
     	</nav>
-
-    	<div ng-controller="mainController" class="container">
-
-    		<div class="row">
+        <div ng-controller="mainController" class="search-box row">
     			<form ng-submit="getResults()" class="twelve columns">
-    				<input type="text" ng-model="search" placeholder="Enter name" class="search"/> 
+    				<input type="text" ng-model="search" placeholder="Enter Movie or TV Show name" class="search"/> 
     				<button type="submit" class="submit button-primary"> Search </button>
     			</form>
     		</div>
+
+    	<div class="container">
+
 
             <div ng-view></div>
 
