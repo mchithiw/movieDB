@@ -3,14 +3,24 @@
         <ul>
             <li class="result" ng-repeat="result in results">
                 <div class="temp row">
-                    <div class="img-container three columns">
+                    <div class="img-container two columns">
                         <img class="results-img" alt="image" ng-src="{{result.poster_path}}" />
                     </div>
-                    <div class="nine columns">
-                        <h2 class="list-title" ng-click="singlePage(result.media_type, result.id)"> {{result.original_title}} </h2>
+                    <div class="ten columns">
+                        <h3 class="list-title" ng-click="singlePage(result.media_type, result.id)"> {{result.original_title}} </h3>
                         <p class="release"> {{result.release_date}} </p>
-                        <p class="desc"> {{result.overview}} </p>
-                    </div>
+                        <div class="rating">
+                            <span ng-repeat="i in result.starArr">
+                                <img class="stars" alt="star" ng-src="{{starImg}}" />
+                            </span>
+                            <span ng-if="result.halfStar">
+                                <img class="stars" alt="half-star" src="content/images/half-star.png" />
+                            </span>
+                        </div>
+                        <p ng-if="result.rating" class="desc"> Rated {{result.vote_average}} by {{result.vote_count}} users. </p>
+                        
+                        <p ng-if="result.noRating" class="desc"> This title hasn't been rated yet! </p>
+                        
                 </div>
             </li> 
         </ul>
