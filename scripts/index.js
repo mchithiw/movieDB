@@ -15,6 +15,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl: 'tv.html',
         controller: 'tvController',
     })
+    .when('/empty', {
+        templateUrl: 'empty.html',
+        controller: 'emptyController',
+    })
 	.otherwise({redirectTo: '/'});
 
 }]);
@@ -23,7 +27,15 @@ app.controller("mainController", function($scope, $http, $location) {
 
     $scope.getResults = function()
     {
-        var temp = $scope.search.replace(" ", "+");
+        var temp = $scope.search;
+        
+        if (typeof temp === 'undefined')
+        {
+            $location.path('/empty');
+            return;
+        }
+        
+        temp = temp.replace(" ", "+");
         var url = '/results/' + temp;
         
         $scope.search = "";
@@ -36,7 +48,7 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
 
     $scope.apiKey = "64635f806db81dc7134381831cdfa427";
     $scope.posterBase = "http://image.tmdb.org/t/p/";
-    $scope.smallImgSize = "w154";
+    $scope.smallImgSize = "w92";
     $scope.mediumImgSize = "w185";
     $scope.largeImgSize = "w342";
     $scope.backdropImgSize = "w1280";
@@ -51,6 +63,11 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
         .then(function(response) {
             
             var i = response.data.results.length;
+            
+            if (i === 0)
+            {
+                $location.path('/empty');
+            }
             
             while (i--)
             {
@@ -70,15 +87,37 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
                 
                 if (value.media_type === "tv")
                     value.original_title = value.original_name;
-                    
+                
+                var ratingNum = Math.floor(value.vote_average);
+                
+                if (ratingNum === 0)
+                {
+                    value.rating = false;
+                    value.noRating = true;
+                } else
+                    value.rating = true;
+                
+                
+                var ratingDec = value.vote_average % 1;
+                ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
+                if (Math.round(ratingDec) === 1)
+                {
+                    value.halfStar = true;
+                }
+                
+                var arr = [];
+            
+                for (var i = 0; i < ratingNum; i++) {
+                    arr[i] = i;
+                }
+                
+                value.starArr = arr;
                 
             });
             
-            $scope.results = response.data.results;
-                
-            console.log($scope.results);
+            $scope.starImg = "content/images/star.png";
             
-            //$location.path('/results');
+            $scope.results = response.data.results;
             
         });
 
@@ -100,6 +139,12 @@ app.controller("movieController", function($scope, $http, $routeParams) {
 app.controller("tvController", function($scope, $http, $routeParams) {
     
     $scope.id = $routeParams.id;
+
+});
+
+app.controller("emptyController", function($scope) {
+    
+    //$scope.img = "content/images/oops.jpg";
 
 });
 

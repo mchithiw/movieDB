@@ -15,12 +15,16 @@ html, body{
 }
 
 .title{
-    color: #1EAEDB;
+    color: #67dbff;
     padding: 15px;
     padding-left: 0px;
     padding-bottom: 0;
     margin: 0;
     margin-left: 20px;
+}
+
+.container{
+    padding-top: 30px;
 }
 
 .search{
@@ -49,14 +53,22 @@ ul{
     padding-top: 20px;
 }
 
+.result:first-child{
+    border: none;
+}
+
 .results-img{
-    width: 100%;
-    max-width: 154px;
+    max-width: 92px;
 }
 
 .release{
     padding: 5px;
     margin: 5px;
+    font-size: 1.75rem;
+}
+
+.stars{
+    max-width: 32px;
 }
 
 .list-title{
@@ -73,6 +85,15 @@ ul{
 
 .desc{
     line-height: 1.8;
+    font-size: 1.75rem;
+}
+
+.empty-box{
+    margin-top: 30px;
+}
+
+.oops{
+    color: #1EAEDB;
 }
 
 @media(max-width: 800px) {
@@ -85,6 +106,16 @@ ul{
         line-height: 1.5;
     }
     
+    .img-container{
+        margin-right: 35px;
+    }
+    
+}
+
+@media(max-width: 550px) {
+    .temp{
+        display: block;
+    }
 }
 
 @media(max-width: 500px) {
