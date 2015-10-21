@@ -2,11 +2,11 @@
 
         <ul>
             <li class="result" ng-repeat="result in results">
-                <div class="row">
-                    <div class="two columns">
+                <div class="temp row">
+                    <div class="img-container three columns">
                         <img class="results-img" alt="image" ng-src="{{result.poster_path}}" />
                     </div>
-                    <div class="ten columns">
+                    <div class="nine columns">
                         <h2 class="list-title" ng-click="singlePage(result.media_type, result.id)"> {{result.original_title}} </h2>
                         <p class="release"> {{result.release_date}} </p>
                         <p class="desc"> {{result.overview}} </p>
