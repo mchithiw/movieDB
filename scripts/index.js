@@ -133,8 +133,75 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
 app.controller("movieController", function($scope, $http, $routeParams) {
     
     $scope.id = $routeParams.id;
+    
+    $scope.apiKey = "64635f806db81dc7134381831cdfa427";
+    $scope.posterBase = "http://image.tmdb.org/t/p/";
+    $scope.smallImgSize = "w92";
+    $scope.mediumImgSize = "w185";
+    $scope.largeImgSize = "w342";
+    $scope.backdropImgSize = "w1280";
+        
+
+    var url = "https://api.themoviedb.org/3/movie/" + $scope.id + "?api_key=" + $scope.apiKey + "&callback=JSON_CALLBACK";
+    
+    $http.jsonp(url)
+    .then(function(response) {  
+        $scope.movie = response.data;
+        var value = $scope.movie;
+        
+        var temp = value.poster_path;
+                
+                if (temp === null)
+                    var img = "content/images/noposter.png";
+                else
+                    var img = $scope.posterBase + $scope.largeImgSize + temp;
+                
+                value.poster_path = img;
+        
+                if (value.backdrop_path)
+                {
+                    var img = $scope.posterBase + $scope.backdropImgSize + value.backdrop_path;
+                    
+                    value.backdrop_path = img;
+                
+                    //$('.bg').css("background-image", "url(" + img + ")", "");
+                    
+                }
+                
+                var ratingNum = Math.floor(value.vote_average);
+                
+                if (ratingNum === 0)
+                {
+                    value.rating = false;
+                    value.noRating = true;
+                } else
+                    value.rating = true;
+                
+                
+                var ratingDec = value.vote_average % 1;
+                ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
+                if (Math.round(ratingDec) === 1)
+                {
+                    value.halfStar = true;
+                }
+                
+                var arr = [];
+            
+                for (var i = 0; i < ratingNum; i++) {
+                    arr[i] = i;
+                }
+                
+                value.starArr = arr;
+            
+            $scope.starImg = "content/images/star.png";
+    });
+    
+    
+    
+    
 
 });
+
 
 app.controller("tvController", function($scope, $http, $routeParams) {
     
