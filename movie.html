@@ -1,3 +1,31 @@
-<div>
-    {{id}}
+<div class="movie-main">
+    
+    <div class="row">
+    
+        <div class="twelve columns">
+            <h3 class="movie-title">{{movie.original_title}} <span class="release blue-text">Released on {{movie.release_date}}</span></h3>
+        </div>
+    
+    </div>
+    
+    <div class="movie-box row">
+
+        <div class="img-container five columns">
+            <img class="movie-img" alt="image" ng-src="{{movie.poster_path}}" />
+        </div>
+
+        <div class="seven columns movie-content"> 
+            <div class="rating">
+                <span ng-repeat="i in movie.starArr">                           <img class="stars" alt="star" ng-src="{{starImg}}" />
+                </span>
+                <span ng-if="movie.halfStar">                                   <img class="stars" alt="half-star" src="content/images/half-star.png" />
+                </span>
+                <p ng-if="movie.rating" class="rate"> Rated <span class="blue-text">{{movie.vote_average}}/10</span> by <span class="blue-text">{{movie.vote_count}}</span> users. </p>
+
+                            <p ng-if="movie.noRating" class="desc"> This title hasn't been rated yet! </p>
+            </div>
+            <p class="desc">{{movie.overview}}</p
+        </div>
+
+    </div>
 </div>
