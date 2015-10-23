@@ -1,3 +1,32 @@
-<div>
-    {{id}}
+<div class="movie-main">
+    
+    <div class="row">
+    
+        <div class="twelve columns">
+            <h3 class="movie-title">{{show.original_name}} <span ng-if="show.first_air_date" class="release blue-text"> First aired on {{show.first_air_date}} </span> </h3>
+        </div>
+    
+    </div>
+    
+    <div class="movie-box row">
+
+        <div class="img-container five columns">
+            <img class="movie-img" alt="image" ng-src="{{show.poster_path}}" />
+        </div>
+
+        <div class="seven columns movie-content"> 
+            <div class="rating">
+                <span ng-repeat="i in show.starArr">                           <img class="stars" alt="star" ng-src="{{starImg}}" />
+                </span>
+                <span ng-if="show.halfStar">                                   <img class="stars" alt="half-star" src="content/images/half-star.png" />
+                </span>
+                <p ng-if="show.rating" class="rate"> Rated <span class="blue-text">{{show.vote_average}}/10</span> by <span class="blue-text">{{show.vote_count}}</span> users. </p>
+
+                            <p ng-if="show.noRating" class="desc"> This title hasn't been rated yet! </p>
+            </div>
+            <p ng-if="show.seasonCount > 0" class="desc"> Seasons: <span class="blue-text">{{show.seasonCount}} </span></p>
+            <p class="desc">{{show.overview}}</p
+        </div>
+
+    </div>
 </div>
