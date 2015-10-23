@@ -19,7 +19,8 @@
     <body ng-app="myApp">
 
     	<nav class="header"> 
-    		<h3 class="title"> Mehtab's Movie DB </h3> 
+    		<!--<h3 class="title"> Movie DB </h3>-->
+            <span class="title logo-span"> <img src="content/images/logo.png" class="logo" alt="logo" /> </span>
             <div ng-controller="mainController" class="search-box row">
     			<form ng-submit="getResults()" class="twelve columns">
     				<input type="text" ng-model="search" placeholder="Enter a title" class="search"/> 
@@ -33,11 +34,18 @@
             <div ng-view></div>
 
     	</div>
+        
+        <div class="bg"></div>
 
     <script type="text/javascript" src="scripts/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"> </script>
     <script type="text/javascript" src="scripts/index.js"></script>
+        
+    <script type="text/javascript" src="scripts/resultsController.js"></script>
+    <script type="text/javascript" src="scripts/tvController.js"></script>
+    <script type="text/javascript" src="scripts/movieController.js"></script>
+    
     </body>
 
  </html>
