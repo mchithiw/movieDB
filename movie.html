@@ -3,7 +3,7 @@
     <div class="row">
     
         <div class="twelve columns">
-            <h3 class="movie-title">{{movie.original_title}} <span class="release blue-text">Released on {{movie.release_date}}</span></h3>
+            <h3 class="movie-title">{{movie.original_title}} <span ng-if="movie.release_date" class="release blue-text">Released on {{movie.release_date}}</span></h3>
         </div>
     
     </div>

@@ -14,9 +14,6 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
 
 		var url = "https://api.themoviedb.org/3/search/multi?query=" + search + "&api_key=" + apiKey + "&callback=JSON_CALLBACK";
     
-    $(".bg").css("background-image", "none");
-    $(".header").css("background-color", "black");
-    
     
     function setImg(value)
     {
@@ -31,7 +28,11 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
     
     function ratings(value) 
     {
+        
         var ratingNum = Math.floor(value.vote_average);
+        
+        var ratingDec = value.vote_average % 1;
+        ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
                 
         if (ratingNum === 0)
         {
@@ -41,8 +42,6 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
             value.rating = true;
         
         
-        var ratingDec = value.vote_average % 1;
-        ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
         if (Math.round(ratingDec) === 1)
         {
             value.halfStar = true;
@@ -65,6 +64,10 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
             if (i === 0)
             {
                 $location.path('/empty');
+            } else
+            {
+                $(".bg").css("background-image", "none");
+                $(".header").css("background-color", "black");
             }
             
             while (i--)
@@ -74,6 +77,33 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
             }
             
             angular.forEach(response.data.results, function(value, key) {
+                
+                if (value.media_type !== "tv")
+                {
+                    $http.jsonp("https://api.themoviedb.org/3/movie/" + value.id + "?api_key=" + $scope.apiKey + "&callback=JSON_CALLBACK")
+        .then(function(response) {
+                value.imdb_id = response.data.imdb_id;
+                console.log(value.imdb_id);
+                        
+                if (typeof value.imdb_id !== "undefined")
+                {
+                    var omdbUrl = "http://www.omdbapi.com/?i=" + value.imdb_id + "&callback=JSON_CALLBACK";
+
+                    $http.jsonp(omdbUrl)
+                    .then(function(response) {
+
+                        value.vote_average = response.data.imdbRating;
+                        value.vote_count = response.data.imdbVotes;
+                        
+                        console.log(value.vote_average);
+
+                    });
+                }
+                
+        });
+                }
+        
+                
                 setImg(value);
                 ratings(value);
                 
