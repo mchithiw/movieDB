@@ -11,13 +11,15 @@ app.controller("tvController", function($scope, $http, $routeParams, $location) 
     $scope.backdropImgSize = "w1280";
         
 
-    var url = "https://api.themoviedb.org/3/tv/" + $scope.id + "?api_key=" + $scope.apiKey + "&callback=JSON_CALLBACK";
+    var url = "https://api.themoviedb.org/3/tv/" + $scope.id + "?api_key=" + $scope.apiKey + "&append_to_response=external_ids&callback=JSON_CALLBACK";
     
     
     $http.jsonp(url)
     .then(function(response) {
         
         $scope.show = response.data;
+        
+        $scope.show.imdb_id = response.data.external_ids.imdb_id;
         
         setImg();
         ratings();
@@ -62,6 +64,29 @@ app.controller("tvController", function($scope, $http, $routeParams, $location) 
         var value = $scope.show;
         
         var ratingNum = Math.floor(value.vote_average);
+        var ratingDec = value.vote_average % 1;
+        ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
+        
+        
+        var imdbID = value.imdb_id;
+        
+        if (typeof imdbID !== "undefined")
+        {
+            var omdbUrl = "http://www.omdbapi.com/?i=" + imdbID + "&callback=JSON_CALLBACK";
+            
+            $http.jsonp(omdbUrl)
+            .then(function(response) {
+                
+                console.log(response.data);
+                ratingNum = Math.floor(response.data.imdbRating);
+                ratingDec = (Math.round(response.data.imdbRating * 2) / 2).toFixed(2);
+                
+                value.vote_average = response.data.imdbRating;
+                value.vote_count = response.data.imdbVotes;
+                
+            });
+        }
+        
                 
         if (ratingNum === 0)
         {
@@ -70,8 +95,6 @@ app.controller("tvController", function($scope, $http, $routeParams, $location) 
         } else
             value.rating = true;   
         
-        var ratingDec = value.vote_average % 1;
-        ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
         
         if (Math.round(ratingDec) === 1)
         {

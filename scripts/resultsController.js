@@ -76,6 +76,9 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
                     response.data.results.splice(i, 1);
             }
             
+            if (response.data.results.length > 8)
+                response.data.results.splice(8, response.data.results.length);
+            
             angular.forEach(response.data.results, function(value, key) {
                 
                 if (value.media_type !== "tv")
@@ -83,6 +86,27 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
                     $http.jsonp("https://api.themoviedb.org/3/movie/" + value.id + "?api_key=" + $scope.apiKey + "&callback=JSON_CALLBACK")
         .then(function(response) {
                 value.imdb_id = response.data.imdb_id;
+                        
+                if (typeof value.imdb_id !== "undefined")
+                {
+                    var omdbUrl = "http://www.omdbapi.com/?i=" + value.imdb_id + "&callback=JSON_CALLBACK";
+
+                    $http.jsonp(omdbUrl)
+                    .then(function(response) {
+
+                        value.vote_average = response.data.imdbRating;
+                        value.vote_count = response.data.imdbVotes;
+
+
+                    });
+                }
+                
+        });
+                } else
+                {
+                    $http.jsonp("https://api.themoviedb.org/3/tv/" + value.id + "?api_key=" + $scope.apiKey + "&append_to_response=external_ids&callback=JSON_CALLBACK")
+        .then(function(response) {
+                value.imdb_id = response.data.external_ids.imdb_id;
                 console.log(value.imdb_id);
                         
                 if (typeof value.imdb_id !== "undefined")
@@ -102,6 +126,7 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
                 
         });
                 }
+                
         
                 
                 setImg(value);
