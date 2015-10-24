@@ -18,10 +18,10 @@
     
     <body ng-app="myApp">
 
-    	<nav class="header"> 
+    	<nav class="header" ng-controller="mainController"> 
     		<!--<h3 class="title"> Movie DB </h3>-->
-            <span class="title logo-span"> <img src="content/images/logo.png" class="logo" alt="logo" /> </span>
-            <div ng-controller="mainController" class="search-box row">
+            <span class="title logo-span"> <img ng-click="home()" src="content/images/logo.png" class="logo" alt="logo" /> </span>
+            <div class="search-box row">
     			<form ng-submit="getResults()" class="twelve columns">
     				<input type="text" ng-model="search" placeholder="Enter a title" class="search"/> 
     				<button type="submit" class="submit button-primary"> Search </button>

@@ -25,7 +25,7 @@ app.controller("movieController", function($scope, $http, $routeParams, $locatio
         $scope.loadingImg = false;
         
     }, function() {
-        
+
         $location.path('/');
         
     });
@@ -62,6 +62,28 @@ app.controller("movieController", function($scope, $http, $routeParams, $locatio
         var value = $scope.movie;
         
         var ratingNum = Math.floor(value.vote_average);
+        
+        var ratingDec = value.vote_average % 1;
+        ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
+        
+        var imdbID = value.imdb_id;
+        
+        if (typeof imdbID !== "undefined")
+        {
+            var omdbUrl = "http://www.omdbapi.com/?i=" + imdbID + "&callback=JSON_CALLBACK";
+            
+            $http.jsonp(omdbUrl)
+            .then(function(response) {
+                
+                console.log(response.data);
+                ratingNum = Math.floor(response.data.imdbRating);
+                ratingDec = (Math.round(response.data.imdbRating * 2) / 2).toFixed(2);
+                
+                $scope.movie.vote_average = response.data.imdbRating;
+                $scope.movie.vote_count = response.data.imdbVotes;
+                
+            });
+        }
                 
         if (ratingNum === 0)
         {
@@ -70,8 +92,6 @@ app.controller("movieController", function($scope, $http, $routeParams, $locatio
         } else
             value.rating = true;   
         
-        var ratingDec = value.vote_average % 1;
-        ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
         
         if (Math.round(ratingDec) === 1)
         {

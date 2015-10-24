@@ -1,4 +1,4 @@
-app.controller("tvController", function($scope, $http, $routeParams) {
+app.controller("tvController", function($scope, $http, $routeParams, $location) {
     
     $scope.id = $routeParams.id;
     $scope.loadingImg = true;
@@ -26,7 +26,7 @@ app.controller("tvController", function($scope, $http, $routeParams) {
         $scope.show.seasonCount = $scope.show.seasons.length - 1;
         
     }, function() {
-        
+
         $location.path('/');
         
     });

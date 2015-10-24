@@ -19,10 +19,18 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl: 'empty.html',
         controller: 'emptyController',
     })
+    .when('/', {
+        templateUrl: 'home.html',
+        controller: 'homeController',
+    })
 	.otherwise({redirectTo: '/'});
 
 }]);
 
+app.controller("homeController", function($scope, $location) {
+    $(".bg").css("background-image", "none");
+    $(".header").css("background-color", "black");
+});
 
 app.controller("mainController", function($scope, $http, $location) {
 
@@ -30,7 +38,7 @@ app.controller("mainController", function($scope, $http, $location) {
     {
         var temp = $scope.search;
         
-        if (typeof temp === 'undefined')
+        if (typeof temp === 'undefined' || temp === "")
         {
             $location.path('/empty');
             return;
@@ -42,6 +50,11 @@ app.controller("mainController", function($scope, $http, $location) {
         $scope.search = "";
 
         $location.path(url);
+    }
+    
+    $scope.home = function() 
+    {
+        $location.path('/');
     }
 });
 
