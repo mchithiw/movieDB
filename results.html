@@ -10,8 +10,9 @@
                     </div>
                     <div class="ten columns">
                         <h3 class="list-title" ng-click="singlePage(result.media_type, result.id)"> {{result.original_title}} </h3>
-                        <p class="release"> {{result.release_date}} </p>
-                        <div class="rating">
+                        <p ng-if="result.release_date" class="release"> {{result.release_date}} </p>
+                        <p class="release" ng-if="result.first_air_date"> {{result.first_air_date}} </p>
+                        <!--<div class="rating">
                             <span ng-repeat="i in result.starArr">
                                 <img class="stars" alt="star" ng-src="{{starImg}}" />
                             </span>
@@ -21,7 +22,7 @@
                         </div>
                         <p ng-if="result.rating" class="desc"> Rated {{result.vote_average}}/10 by {{result.vote_count}} users. </p>
                         
-                        <p ng-if="result.noRating" class="desc"> This title hasn't been rated yet! </p>
+                        <p ng-if="result.noRating" class="desc"> This title hasn't been rated yet! </p>-->
                         
                 </div>
             </li> 
