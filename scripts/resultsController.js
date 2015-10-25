@@ -81,7 +81,7 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
             
             angular.forEach(response.data.results, function(value, key) {
                 
-                if (value.media_type !== "tv")
+                /*if (value.media_type !== "tv")
                 {
                     $http.jsonp("https://api.themoviedb.org/3/movie/" + value.id + "?api_key=" + $scope.apiKey + "&callback=JSON_CALLBACK")
         .then(function(response) {
@@ -125,12 +125,12 @@ app.controller("resultsController", function($scope, $http, $location, $routePar
                 }
                 
         });
-                }
+                }*/
                 
         
                 
                 setImg(value);
-                ratings(value);
+                //ratings(value);
                 
                 if (value.media_type === "tv")
                     value.original_title = value.original_name;

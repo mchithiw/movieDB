@@ -25,6 +25,7 @@
                             <p ng-if="show.noRating" class="desc"> This title hasn't been rated yet! </p>
             </div>
             <p ng-if="show.seasonCount > 0" class="desc"> Seasons: <span class="blue-text">{{show.seasonCount}} </span></p>
+            <p class="desc" ng-if="show.genres.length > 0"> Genres: <span class="blue-text" ng-repeat="genre in show.genres"> {{genre.name}}. </span></p>
             <p class="desc">{{show.overview}}</p
         </div>
 

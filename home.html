@@ -1,0 +1,34 @@
+        <img ng-if="loadingImg" src="content/images/loading.gif" alt="Loading..."/>
+
+<div class="row home-stuff">
+    <h3 class="blue-text popular"> Popular Movies </h3>
+    
+    <div class="eight columns popular-box">
+                <div class="popular-items" ng-repeat="movie in popular">
+                    <div class="">
+                        <img class="popular-image" alt="image" ng-click="singlePage('movie', movie.id)" ng-src="{{movie.poster_path}}" />
+                    </div>
+                    <div class="popular-title">
+                        <h3 class="" ng-click="singlePage('movie', movie.id)"> {{movie.original_title}} </h3>
+                        
+                    </div>
+                </div>
+    </div>
+    
+    <!--<div class="six columns playing-box">
+        <h3 class="blue-text popular"> Now Playing </h3>
+        <ul>
+            <li class="" ng-repeat="movie in playing">
+                <div class="">
+                    <div class="img-container">
+                        <img class="results-img" alt="image" ng-src="{{movie.poster_path}}" />
+                    </div>
+                    <div class="popular-title">
+                        <h4 class="" ng-click="singlePage('movie', movie.id)"> {{movie.original_title}} </h4>
+                        
+                    </div>
+                </div>
+            </li> 
+        </ul>
+    </div>-->
+</div>

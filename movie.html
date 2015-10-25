@@ -24,6 +24,8 @@
 
                             <p ng-if="movie.noRating" class="desc"> This title hasn't been rated yet! </p>
             </div>
+            
+            <p class="desc" ng-if="movie.genres.length > 0"> Genres: <span class="blue-text" ng-repeat="genre in movie.genres"> {{genre.name}}. </span></p>
             <p class="desc">{{movie.overview}}</p
         </div>
 

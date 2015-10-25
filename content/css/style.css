@@ -71,6 +71,15 @@ body{
     padding-top: 15px;
 }
 
+.popular-box{
+}
+
+.popular-image{
+    max-width: 500px;
+    width: 100%;
+    cursor: pointer;
+}
+
 .search{
 	width: 40%;
 	margin-top: 20px;
@@ -147,6 +156,11 @@ ul{
     max-width: 32px;
 }
 
+.popular{
+    margin-top: 30px;
+    margin-left: 35px;
+}
+
 .list-title{
     display: inline;
     margin-bottom: 0;
@@ -157,6 +171,15 @@ ul{
 
 .list-title:hover{
     color: #1EAEDB;
+}
+
+.popular-title{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    cursor: pointer;
+    color: #325c9f;
+    margin-left: 0px;
+    display: inline-block;
 }
 
 .desc{
@@ -220,6 +243,10 @@ ul{
 @media(max-width: 550px) {
     .temp{
         display: block;
+    }
+    
+    .popular{
+        margin-left: 0px;
     }
 }
 
