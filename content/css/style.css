@@ -71,7 +71,8 @@ body{
     padding-top: 15px;
 }
 
-.popular-box{
+.pop-box{
+    padding-left: 20px;
 }
 
 .popular-image{
@@ -158,7 +159,6 @@ ul{
 
 .popular{
     margin-top: 30px;
-    margin-left: 35px;
 }
 
 .list-title{
@@ -207,6 +207,33 @@ ul{
 .oops{
     color: #1EAEDB;
 }
+
+.playing-box{
+    text-align: left;
+}
+
+.playing{
+    margin-top: 30px;
+}
+
+.home-desc{
+    padding-bottom: 0px;
+}
+
+.home-desc:hover{
+    color: #1EAEDB;
+    cursor: pointer;
+}
+
+.home-title{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.home-title:hover{
+    color: #1EAEDB;
+    cursor: pointer;
+}
+
 
 @media(max-width: 800px) {
     
@@ -262,5 +289,9 @@ ul{
     
     .submit{
         margin-left: 0px;
+    }
+    
+    .pop-box{
+        padding-left: 0px;
     }
 }

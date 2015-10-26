@@ -1,34 +1,34 @@
         <img ng-if="loadingImg" src="content/images/loading.gif" alt="Loading..."/>
 
 <div class="row home-stuff">
-    <h3 class="blue-text popular"> Popular Movies </h3>
     
-    <div class="eight columns popular-box">
+    <div class="pop-box seven columns">
+        <h3 class="blue-text popular"> Popular Movies </h3>
                 <div class="popular-items" ng-repeat="movie in popular">
-                    <div class="">
+                    <div class="popular-img-box">
                         <img class="popular-image" alt="image" ng-click="singlePage('movie', movie.id)" ng-src="{{movie.poster_path}}" />
                     </div>
                     <div class="popular-title">
-                        <h3 class="" ng-click="singlePage('movie', movie.id)"> {{movie.original_title}} </h3>
+                        <h3 class="home-title" ng-click="singlePage('movie', movie.id)"> {{movie.original_title}} </h3>
                         
                     </div>
                 </div>
     </div>
     
-    <!--<div class="six columns playing-box">
-        <h3 class="blue-text popular"> Now Playing </h3>
-        <ul>
+    <div class="five columns playing-box">
+        <h3 class="playing blue-text"> Now Playing </h3>
+        <ol class="playing-list">
             <li class="" ng-repeat="movie in playing">
                 <div class="">
-                    <div class="img-container">
+                    <!--<div class="img-container">
                         <img class="results-img" alt="image" ng-src="{{movie.poster_path}}" />
-                    </div>
-                    <div class="popular-title">
-                        <h4 class="" ng-click="singlePage('movie', movie.id)"> {{movie.original_title}} </h4>
+                    </div>-->
+                    <div class="">
+                        <p class="desc home-desc" ng-click="singlePage('movie', movie.id)"> {{movie.original_title}} </p>
                         
                     </div>
                 </div>
             </li> 
-        </ul>
-    </div>-->
+        </ol>
+    </div>
 </div>
