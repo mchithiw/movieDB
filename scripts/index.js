@@ -28,9 +28,9 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 }]);
 
 app.controller("homeController", function($scope, $location, $http) {
+    
     $(".bg").css("background-image", "none");
     $(".header").css("background-color", "black");
-    
     
     $scope.apiKey = "64635f806db81dc7134381831cdfa427";
     $scope.posterBase = "http://image.tmdb.org/t/p/";
@@ -59,19 +59,20 @@ app.controller("homeController", function($scope, $location, $http) {
             
         });
         
-        /*var backdrop = popularMovies[0].backdrop_path;
+        var backdrop = popularMovies[0].backdrop_path;
         
         var backdropUrl = $scope.posterBase + $scope.backdropImgSize + backdrop;
         
             $('.bg').css("background-image", "url(" + backdropUrl + ")", "");
             $(".bg").css("background-size", "contain");
             $(".bg").css("background-repeat", "repeat-y");
-            $(".header").css("background-color", "transparent");*/
+            $(".header").css("background-color", "transparent");
         
         
         $scope.popular = popularMovies;
         
         $scope.loadingImg = false;
+        
         
     });
     
@@ -95,6 +96,7 @@ app.controller("homeController", function($scope, $location, $http) {
         $location.path(url);
     }
     
+    
     var urlPlaying = "https://api.themoviedb.org/3/movie/now_playing?&api_key=" + apiKey + "&callback=JSON_CALLBACK";
     
     $http.jsonp(urlPlaying)
@@ -115,13 +117,10 @@ app.controller("homeController", function($scope, $location, $http) {
         
         $scope.loadingImg = false;
         
-        $(".popular-box").slick({
-            arrows: false,
-            autoplay: true
-        });
+        console.log("hi");
+        
         
     });
-    
     
     
 });
