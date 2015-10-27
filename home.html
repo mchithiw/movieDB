@@ -4,7 +4,9 @@
     
     <div class="pop-box seven columns">
         <h3 class="blue-text popular"> Popular Movies </h3>
-                <div class="popular-items" ng-repeat="movie in popular">
+        
+        <ul>
+            <li class="popular-items" ng-repeat="movie in popular">
                     <div class="popular-img-box">
                         <img class="popular-image" alt="image" ng-click="singlePage('movie', movie.id)" ng-src="{{movie.poster_path}}" />
                     </div>
@@ -12,7 +14,9 @@
                         <h3 class="home-title" ng-click="singlePage('movie', movie.id)"> {{movie.original_title}} </h3>
                         
                     </div>
-                </div>
+            </li>
+        
+        </ul>
     </div>
     
     <div class="five columns playing-box">
