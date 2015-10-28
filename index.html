@@ -12,6 +12,7 @@
 
         <link rel="stylesheet" href="content/css/normalize.css">
         <link rel="stylesheet" href="content/css/skeleton.css">
+        <link href="content/css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" href="content/css/style.css">
         
 
@@ -21,7 +22,7 @@
 
     	<nav class="header" ng-controller="mainController"> 
     		<!--<h3 class="title"> Movie DB </h3>-->
-            <span class="title logo-span"> <img ng-click="home()" src="content/images/logo.png" class="logo" alt="logo" /> </span>
+            <span class="title logo-span"> <img ng-click="home()" src="content/images/logo3.png" class="logo" alt="logo" /> </span>
             <div class="search-box row">
     			<form ng-submit="getResults()" class="twelve columns">
     				<input type="text" ng-model="search" placeholder="Enter a title" class="search"/> 
@@ -40,6 +41,7 @@
 
     <script type="text/javascript" src="scripts/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="scripts/jquery.js"> </script>
 
         

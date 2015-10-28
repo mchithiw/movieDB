@@ -1,5 +1,5 @@
 
-var app = angular.module("myApp", ['ngRoute']);
+var app = angular.module("myApp", ['ngRoute', 'ui.bootstrap']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -64,8 +64,7 @@ app.controller("homeController", function($scope, $location, $http) {
         var backdropUrl = $scope.posterBase + $scope.backdropImgSize + backdrop;
         
             $('.bg').css("background-image", "url(" + backdropUrl + ")", "");
-            $(".bg").css("background-size", "contain");
-            $(".bg").css("background-repeat", "repeat-y");
+            $(".bg").css("background-size", "cover");
             $(".header").css("background-color", "transparent");
         
         
