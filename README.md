@@ -1,9 +1,18 @@
 # movieDB
 Movies
 
-To-do:
+Done:
+- IMDB ratings
+- Home page
+- Detailed page
+- Search page
 
-- IMDB ratings from Omdb API
-- Home page (popular, currently in theaters, etc)
-- Search by ratings, genre, year, etc
-- Sort by ratings, year, etc
+To-do:
+- Remove TheMovieDb ratings to ensure they don't glitch with OMDB ratings.
+- Cast info
+- People pages (linked from cast, by search, etc)
+- Trailers/other videos on detailed pages
+- Recommended/similar movies
+- User accounts
+- Favorites list
+- Add reviews

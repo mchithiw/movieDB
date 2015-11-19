@@ -8,7 +8,7 @@
         <carousel interval="4000">
             <slide class="popular-items" ng-repeat="movie in popular">
                     <div class="popular-img-box">
-                        <img class="popular-image" alt="image" ng-src="{{movie.poster_path}}" />
+                        <img class="popular-image" alt="image" ng-src="{{movie.poster_path}}" ng-click="singlePage('movie', movie.id)"/>
                     </div>
                     <div class="popular-title">
                         <h3 class="home-title" ng-click="singlePage('movie', movie.id)"> {{movie.original_title}} </h3>

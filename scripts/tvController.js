@@ -63,10 +63,8 @@ app.controller("tvController", function($scope, $http, $routeParams, $location) 
     {
         var value = $scope.show;
         
-        var ratingNum = Math.floor(value.vote_average);
-        var ratingDec = value.vote_average % 1;
-        ratingDec = (Math.round(ratingDec * 2) / 2).toFixed(2);
-        
+        value.rating = false;
+        value.noRating = false;
         
         var imdbID = value.imdb_id;
         
@@ -77,37 +75,42 @@ app.controller("tvController", function($scope, $http, $routeParams, $location) 
             $http.jsonp(omdbUrl)
             .then(function(response) {
                 
-                console.log(response.data);
                 ratingNum = Math.floor(response.data.imdbRating);
-                ratingDec = (Math.round(response.data.imdbRating * 2) / 2).toFixed(2);
+                ratingDec = response.data.imdbRating - ratingNum;
                 
                 value.vote_average = response.data.imdbRating;
                 value.vote_count = response.data.imdbVotes;
                 
+                if (ratingNum === 0)
+                {
+                    value.rating = false;
+                    value.noRating = true;
+                } 
+
+                if (Math.round(ratingDec) === 1)
+                {
+                    value.halfStar = true;
+                }
+
+                var arr = [];
+
+                for (var i = 0; i < ratingNum; i++) {
+                    arr[i] = i;
+                }
+
+                value.starArr = arr;
+                
+                if (response.data.imdbRating !== "N/A" || response.data.imdbVotes !== "N/A")
+                {
+                    value.rating = true;
+                    value.noRating = false;
+                }
+                
             });
-        }
+        } else
+            value.noRating = true;
         
                 
-        if (ratingNum === 0)
-        {
-            value.rating = false;
-            value.noRating = true;
-        } else
-            value.rating = true;   
-        
-        
-        if (Math.round(ratingDec) === 1)
-        {
-            value.halfStar = true;
-        }
-        
-        var arr = [];
-    
-        for (var i = 0; i < ratingNum; i++) {
-            arr[i] = i;
-        }
-        
-        value.starArr = arr;
     }
 
 
