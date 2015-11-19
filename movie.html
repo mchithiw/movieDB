@@ -1,5 +1,7 @@
 <div class="movie-main">
     
+    <img ng-if="loadingImg" src="content/images/loading.gif" alt="Loading..."/>
+    
     <div class="row">
     
         <div class="twelve columns">
@@ -11,18 +13,18 @@
     <div class="movie-box row">
 
         <div class="img-container five columns">
-            <img class="movie-img" alt="image" ng-src="{{movie.poster_path}}" />
+            <img class="movie-img" alt="{{movie.original_title}}" ng-src="{{movie.poster_path}}" />
         </div>
 
         <div class="seven columns movie-content"> 
             <div class="rating">
-                <span ng-repeat="i in movie.starArr">                           <img class="stars" alt="star" ng-src="{{starImg}}" />
+                <span ng-if="movie.rating" ng-repeat="i in movie.starArr">                           <img class="stars" alt="star" ng-src="{{starImg}}" />
                 </span>
-                <span ng-if="movie.halfStar">                                   <img class="stars" alt="half-star" src="content/images/half-star.png" />
+                <span ng-if="movie.halfStar && movie.rating">                                   <img class="stars" alt="half-star" src="content/images/half-star.png" />
                 </span>
                 <p ng-if="movie.rating" class="rate"> Rated <span class="blue-text">{{movie.vote_average}}/10</span> by <span class="blue-text">{{movie.vote_count}}</span> users. </p>
 
-                            <p ng-if="movie.noRating" class="desc"> This title hasn't been rated yet! </p>
+                <p ng-if="movie.noRating" class="desc"> This title hasn't been rated yet! </p>
             </div>
             
             <p class="desc" ng-if="movie.genres.length > 0"> Genres: <span class="blue-text" ng-repeat="genre in movie.genres"> {{genre.name}}. </span></p>
