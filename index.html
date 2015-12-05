@@ -26,6 +26,7 @@
     			<form ng-submit="getResults()" class="twelve columns">
     				<input type="text" ng-model="search" placeholder="Enter a title" class="search"/> 
     				<button type="submit" class="submit button-primary"> Search </button>
+                    <button type="button" class="button-primary favorite-button" ng-click="favorites()"> Favorites List </button>
     			</form>
     		</div>
     	</nav>
@@ -49,6 +50,7 @@
     <script type="text/javascript" src="scripts/resultsController.js"></script>
     <script type="text/javascript" src="scripts/tvController.js"></script>
     <script type="text/javascript" src="scripts/movieController.js"></script>
+     <script type="text/javascript" src="scripts/favoritesController.js"></script>
     
     </body>
 

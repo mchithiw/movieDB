@@ -1,4 +1,4 @@
-app.controller("movieController", function($scope, $http, $routeParams, $location) {
+app.controller("movieController", function($scope, $http, $sce, $routeParams, $location) {
     
     $scope.id = $routeParams.id;
     $scope.loadingImg = true;
@@ -9,9 +9,52 @@ app.controller("movieController", function($scope, $http, $routeParams, $locatio
     $scope.mediumImgSize = "w185";
     $scope.largeImgSize = "w342";
     $scope.backdropImgSize = "w1280";
+    $scope.inFavorites = false;
+    $scope.favoriteButton = "Add to Favorites";
+    
+    var fav = localStorage.getItem("favorites");
+            
+            if (fav === "" ||fav === null || typeof fav === "undefined")
+                fav = [];
+            else
+                fav = JSON.parse(fav);
+    
+    angular.forEach(fav, function(value, key) {
+       
+        if (value.id == $scope.id)
+        {
+            $scope.inFavorites = true;
+            $scope.favoriteButton = "Added to Favorites";
+            return false;
+        }
+        
+    });
+    
+    $scope.addToFavorites = function() {
+
+            var favList = localStorage.getItem("favorites");
+            
+            if (favList === "" ||favList === null || typeof favList === "undefined")
+                favList = [];
+            else
+                favList = JSON.parse(favList);
+            
+            console.log(favList);
+            
+            favList.push($scope.movie);
+            
+            console.log(favList);
+            
+            localStorage.setItem("favorites", JSON.stringify(favList));
+            
+            $scope.inFavorites = true; 
+            $scope.favoriteButton = "Added to Favorites";
+
+        
+    }
         
 
-    var url = "https://api.themoviedb.org/3/movie/" + $scope.id + "?api_key=" + $scope.apiKey + "&callback=JSON_CALLBACK";
+    var url = "https://api.themoviedb.org/3/movie/" + $scope.id + "?api_key=" + $scope.apiKey + "&append_to_response=trailers&callback=JSON_CALLBACK";
     
     
     $http.jsonp(url)
@@ -21,6 +64,14 @@ app.controller("movieController", function($scope, $http, $routeParams, $locatio
         
         setImg();
         ratings();
+        
+        if (response.data.trailers.youtube.length > 0)
+        {
+            $scope.movie.source = "http://www.youtube.com/embed/" +                response.data.trailers.youtube[0].source;
+        
+        $scope.movie.source = $sce.trustAsResourceUrl($scope.movie.source);
+            
+        }
         
         $scope.loadingImg = false;
         
@@ -74,7 +125,6 @@ app.controller("movieController", function($scope, $http, $routeParams, $locatio
             $http.jsonp(omdbUrl)
             .then(function(response) {
                 
-                console.log(response.data);
                 var ratingNum = Math.floor(response.data.imdbRating);
                 var ratingDec = response.data.imdbRating - ratingNum;
                 

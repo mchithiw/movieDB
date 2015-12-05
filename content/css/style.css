@@ -124,6 +124,7 @@ ul{
     max-width: 250px;
     border-radius: 10px;
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .movie-content{
@@ -259,7 +260,43 @@ ul{
     background-color: #1EAEDB;
 }
 
+.add-favorites{
+    margin-top: 20px;
+}
 
+.empty-button{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.favorites-title{
+    font-size: 1.75em;
+    display: inline-block;
+}
+
+.favorites-title:hover{
+    color: #1EAEDB;
+    cursor: pointer;
+}
+
+.favorite-item{
+    list-style: square;
+}
+
+.favorites{
+    padding-left: 20px;
+}
+
+.empty-list{
+    font-size: 1.5em;
+}
+
+iframe{
+    width: 400px;
+    height: 280px;
+    display: block;
+    margin-bottom: 20px;
+}
 
 @media(max-width: 800px) {
     
@@ -304,6 +341,11 @@ ul{
     
     .popular{
         margin-left: 0px;
+    }
+    
+    iframe{
+        width: 200px;
+        height: 133px;
     }
 }
 

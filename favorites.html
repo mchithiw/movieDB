@@ -1,0 +1,26 @@
+<div class="favorites">
+    
+    <div class="row">
+        
+        <button class="button-primary empty-button" ng-click="emptyList()" ng-if="!empty"> Empty List </button>
+        
+        <ul class="favorite-list">
+            
+            <li class="favorite-item" ng-repeat="favorite in favorites track by $index">
+                
+                <h4 ng-click="load($index)" ng-if="favorite.original_title" class="favorites-title">{{favorite.original_title}}</h4>
+                
+                <h4 ng-click="load($index)" ng-if="favorite.original_name" class="favorites-title">{{favorite.original_name}}</h4>
+                
+            </li>
+            
+        </ul>
+        
+        <h1 ng-if="empty" class="oops"> Oops! </h1>
+        <h4 class="empty-list" ng-if="empty"> There are no movies or shows in your favorites list. You should add some! </h4>
+        
+        <p class="disclaimer"> The favorites list works on local storage. That means your favorites list will be valid on this device until cookies are cleared, but will not translate across devices. </p>
+        
+    </div>
+    
+</div>

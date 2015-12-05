@@ -19,6 +19,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl: 'empty.html',
         controller: 'emptyController',
     })
+    .when('/favorites', {
+        templateUrl: 'favorites.html',
+        controller: 'favoritesController',
+    })
     .when('/', {
         templateUrl: 'home.html',
         controller: 'homeController',
@@ -125,6 +129,11 @@ app.controller("homeController", function($scope, $location, $http) {
 });
 
 app.controller("mainController", function($scope, $http, $location) {
+    
+    $scope.favorites = function() {
+        
+        $location.path('/favorites');
+    }
 
     $scope.getResults = function()
     {

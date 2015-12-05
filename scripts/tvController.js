@@ -1,4 +1,4 @@
-app.controller("tvController", function($scope, $http, $routeParams, $location) {
+app.controller("tvController", function($scope, $http, $sce, $routeParams, $location) {
     
     $scope.id = $routeParams.id;
     $scope.loadingImg = true;
@@ -9,9 +9,52 @@ app.controller("tvController", function($scope, $http, $routeParams, $location) 
     $scope.mediumImgSize = "w185";
     $scope.largeImgSize = "w342";
     $scope.backdropImgSize = "w1280";
+    $scope.inFavorites = false;
+    $scope.favoriteButton = "Add to Favorites";
+    
+    var fav = localStorage.getItem("favorites");
+            
+            if (fav === "" ||fav === null || typeof fav === "undefined")
+                fav = [];
+            else
+                fav = JSON.parse(fav);
+    
+    angular.forEach(fav, function(value, key) {
+       
+        if (value.id == $scope.id)
+        {
+            $scope.inFavorites = true;
+            $scope.favoriteButton = "Added to Favorites";
+            return false;
+        }
+        
+    });
+    
+    $scope.addToFavorites = function() {
+
+            var favList = localStorage.getItem("favorites");
+            
+            if (favList === "" ||favList === null || typeof favList === "undefined")
+                favList = [];
+            else
+                favList = JSON.parse(favList);
+            
+            console.log(favList);
+            
+            favList.push($scope.show);
+            
+            console.log(favList);
+            
+            localStorage.setItem("favorites", JSON.stringify(favList));
+            
+            $scope.inFavorites = true; 
+            $scope.favoriteButton = "Added to Favorites";
+
+        
+    }
         
 
-    var url = "https://api.themoviedb.org/3/tv/" + $scope.id + "?api_key=" + $scope.apiKey + "&append_to_response=external_ids&callback=JSON_CALLBACK";
+    var url = "https://api.themoviedb.org/3/tv/" + $scope.id + "?api_key=" + $scope.apiKey + "&append_to_response=external_ids,videos&callback=JSON_CALLBACK";
     
     
     $http.jsonp(url)
@@ -23,6 +66,18 @@ app.controller("tvController", function($scope, $http, $routeParams, $location) 
         
         setImg();
         ratings();
+        
+        console.log(response.data);
+        
+        if (response.data.videos.results.length > 0)
+        {
+            $scope.show.source = "http://www.youtube.com/embed/" +                response.data.videos.results[0].key;
+        
+        $scope.show.source = $sce.trustAsResourceUrl($scope.show.source);
+        
+        console.log($scope.show.source);
+            
+        }
         
         $scope.loadingImg = false;
         $scope.show.seasonCount = $scope.show.seasons.length - 1;

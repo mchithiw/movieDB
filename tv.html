@@ -5,6 +5,9 @@
     <div class="row">
     
         <div class="twelve columns">
+            
+            <button ng-disabled="inFavorites" ng-click="addToFavorites()" class="add-favorites button-primary"> {{favoriteButton}} </button>
+            
             <h3 class="movie-title">{{show.original_name}} <span ng-if="show.first_air_date" class="release blue-text"> First aired on {{show.first_air_date}} </span> </h3>
         </div>
     
@@ -28,6 +31,11 @@
 
                 <p ng-if="show.noRating" class="desc"> This title hasn't been rated yet! </p>
             </div>
+            
+            <iframe ng-if="show.source"
+ng-src="{{show.source}}" allowfullscreen>
+</iframe>
+            
             <p ng-if="show.seasonCount > 0" class="desc"> Seasons: <span class="blue-text">{{show.seasonCount}} </span></p>
             <p class="desc" ng-if="show.genres.length > 0"> Genres: <span class="blue-text" ng-repeat="genre in show.genres"> {{genre.name}}. </span></p>
             <p class="desc">{{show.overview}}</p
